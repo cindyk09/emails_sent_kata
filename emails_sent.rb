@@ -19,14 +19,20 @@
 # the argument $limit is empty, then default $limit = 1000 emails;
 # Good luck!
 
-def get_percentage(sent, limit=nil)
+def get_percentage(sent, limit=1000.0)
   if sent == 0
     return "No e-mails sent"
-  elsif
-    sent == limit
+  elsif sent >= limit
     return "Daily limit is reached"
+  else
+    return "#{(((sent.to_f/limit.to_f)*100).floor)}%"
   end
-
-  return "#{(((sent.to_f/limit.to_f)*100).floor)}%"
-
 end
+
+# optimal solution
+
+# def get_percentage(sent, limit = 1000)
+#   return "No e-mails sent" if sent == 0
+#   return "Daily limit is reached" if sent >= limit
+#   "#{(sent.fdiv(limit) * 100).floor}%"
+# end
